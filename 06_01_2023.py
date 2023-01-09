@@ -10,6 +10,21 @@
 
 
 def nb_unique_ways(score: int) -> int:
+    """Computes and returns the number of unique 2x + 3y combinations that
+    sum up to `score`
+
+    Note: there are most likely ways to optimize this
+
+    Args:
+        score (int): the target score N
+
+    Raises:
+        TypeError: if `score` if not an int
+        ValueError: if `score` is <= 0
+
+    Returns:
+        int: the number of combinations, regardless of shots order
+    """
     if not isinstance(score, int):
         raise TypeError
     if score <= 0:
