@@ -6,7 +6,7 @@ from collections import defaultdict
 
 
 def solve_base() -> None:
-    contestants = list(range(1, 20))
+    contestants = list(range(1, 21))
     ind_to_eliminate = 1  # index
     while (lc := len(contestants)) > 1:
         contestants.pop(ind_to_eliminate)
@@ -27,7 +27,7 @@ def solve_extra(n_sim: int = 5_000_000) -> None:
     results: dict = defaultdict(int)
 
     def one_sim() -> None:
-        contestants = list(range(1, 20))
+        contestants = list(range(1, 21))
         ind_to_eliminate = 1  # index
         while (lc := len(contestants)) > 1:
             contestants.pop(ind_to_eliminate)
