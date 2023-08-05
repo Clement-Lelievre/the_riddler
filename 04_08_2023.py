@@ -5,6 +5,7 @@
 # 3 identify the connected components of the graph of incompatible characters
 # 4 for each connected component, keep only one character
 import numpy as np
+from tqdm import tqdm
 
 NB_ROWS = 3
 NB_COLS = 2
@@ -39,7 +40,7 @@ def is_translation(arr1: np.ndarray, arr2: np.ndarray) -> bool:
                 arr[:, 0].sum() == 0,
                 arr[:, -1].sum() == 0,
             )
-        )
+        )  # for other matrix shapes this needs to be adapted
 
     if (
         arr1.sum() != arr2.sum()
@@ -55,29 +56,26 @@ def is_translation(arr1: np.ndarray, arr2: np.ndarray) -> bool:
 
 
 def solve() -> None:
+    print("computing the matrices...")
     matrices = {
-        nb: int_to_numpy(nb) for nb in range(2 ** (NB_COLS * NB_ROWS))
+        nb: int_to_numpy(nb) for nb in tqdm(range(2 ** (NB_COLS * NB_ROWS)))
     }  # caching
-    incompatibilities = {
-        nb1: {
-            nb2
-            for nb2 in range(2 ** (NB_ROWS * NB_COLS))
-            if nb2 != nb1 and is_translation(*map(matrices.get, (nb1, nb2)))
-        }
-        for nb1 in range(2 ** (NB_ROWS * NB_COLS))
-    }
-    print(f"{incompatibilities=}")
-    seen = set()
-    largest_group = set()
-    for k, v in incompatibilities.items():
-        if (current_group := v | {k}) in seen:
+    print("computing the incompatibilities...")
+    incompatibilities = set()
+    for nb1 in tqdm(range(2 ** (NB_ROWS * NB_COLS))):
+        if any(nb1 in group for group in incompatibilities):
             continue
-        largest_group.add(k)
-        seen.add(frozenset(current_group))  # need frozenset as set isn't hashable
-    print(
-        f"{len(largest_group)=}",
-        f"example of a possible largest group with no pairwise incompatibility: {largest_group}",
-    )
+        incompatibilities.add(
+            frozenset(
+                {nb1}
+                | {
+                    nb2
+                    for nb2 in range(2 ** (NB_ROWS * NB_COLS))
+                    if nb2 != nb1 and is_translation(*map(matrices.get, (nb1, nb2)))
+                }
+            )
+        )
+    print(f"Solution: {len(incompatibilities)}; {incompatibilities=}")
 
 
 if __name__ == "__main__":
