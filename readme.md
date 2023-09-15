@@ -1,4 +1,4 @@
-Logic puzzles found on 538/theriddler here: https://fivethirtyeight.com/tag/the-riddler/
+Logic puzzles found on 538/theriddler here: https://fivethirtyeight.com/tag/the-riddler/ and from Summer 2023 onwards [here](https://thefiddler.substack.com/)
 
 some of which can be solved with the help of a program
 
