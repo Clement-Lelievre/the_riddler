@@ -35,6 +35,8 @@ def solve_extra(target: str = "IIIVIIIVIIIVIII"):
 
     def recurse(code: str):
         nonlocal ans
+        if code != target[: len(code)]:
+            return
         if code == target:
             ans += 1
             return
