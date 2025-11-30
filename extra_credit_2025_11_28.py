@@ -1,10 +1,12 @@
 """Given spices numbered 1 to 100, what is the minimal number N of spices needed
 so every number from 1 to 100 can be formed as a sum of a subset of the chosen
-spices (each used at most once)?
+spices (each used at most once)
+Once N found, how many distinct sets of N integers are there that satisfy this condition?
+?
 
 See "extra credit" at https://thefiddler.substack.com/p/can-you-take-the-heat
 """
-# the binary sequence (itself!) needs 7 spices (1,2,4,8,16,32,64) to cover integers 1 to 100 included => this cannot be beaten
+# the sequence of powers of 2 needs 7 spices (1,2,4,8,16,32,64) to cover integers 1 to 100 included => this cannot be beaten
 # it is easily verifiable using the algo below, by replacing 7 with lower values: no sequence will be found
 
 # initially I wanted to check with brute-force, until I realized this wouldn't scale at all
